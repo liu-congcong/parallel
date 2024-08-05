@@ -16,7 +16,7 @@ gcc -o parallel parallel.c threadPool.c -lpthread
 parallel -h
 Run some commands in parallel (https://github.com/liu-congcong/parallel)
 Usage:
-    ./parallel [--threads <int>] [--parameters <parameters>] --input <file>.
+    ./parallel [--threads <int>] [--parameters <str>] --input <str>.
 Options:
     -t/--threads: number of threads [default: 1].
     -p/--parameters: list of parameters.
