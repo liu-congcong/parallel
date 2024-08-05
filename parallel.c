@@ -76,7 +76,7 @@ int printHelp(char *self)
 {
     puts("\nRun some commands in parallel (https://github.com/liu-congcong/parallel)");
     puts("Usage:");
-    printf("    %s [--threads <int>] [--parameters <parameters>] --input <file>.\n", self);
+    printf("    %s [--threads <int>] [--parameters <str>] --input <str>.\n", self);
     puts("Options:");
     puts("    -t/--threads: number of threads [default: 1].");
     puts("    -p/--parameters: list of parameters.");
