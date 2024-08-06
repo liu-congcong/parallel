@@ -2,7 +2,16 @@
 
 Run some commands in parallel.
 
-## Usage
+## Installation
+
+### Pre-compiled file
+
+```bash
+wget https://github.com/liu-congcong/parallel/blob/main/parallel
+chmod 755 parallel
+```
+
+### Compile from source files
 
 ```bash
 git clone https://github.com/liu-congcong/ThreadPool.git
@@ -11,6 +20,8 @@ mv ThreadPool/threadPool.c ThreadPool/threadPool.h parallel/
 cd parallel
 gcc -o parallel parallel.c threadPool.c -lpthread
 ```
+
+## Usage
 
 ```bash
 parallel -h
