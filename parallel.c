@@ -27,14 +27,15 @@ int work(void *arg)
     char *time = NULL;
     time = getTime(2);
     printf("%s -> Doing: \"%s\".\n", time, buffer);
+    fflush(stdout);
     free(time);
     int flag = system(buffer);
     time = getTime(2);
     printf("%s -> Done: \"%s\" (%d).\n", time, buffer, flag);
-    free(time);
     fflush(stdout);
+    free(time);
     free(buffer);
-    return flag;
+    return 0; /* zero */
 }
 
 char *createShell(char *commands)
