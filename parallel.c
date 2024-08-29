@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include <unistd.h>
 #include "threadPool.h"
 #include "time.h"
@@ -35,23 +34,28 @@ int work(void *arg)
     fflush(stdout);
     free(time);
     free(buffer);
-    return 0; /* zero */
+    return 0;
 }
 
 char *createShell(char *commands)
 {
     char *file = getTime(1);
     FILE *openFile = fopen(file, "w");
-    assert(openFile);
-    fputs(commands, openFile);
-    fclose(openFile);
+    if (openFile)
+    {
+        fputs(commands, openFile);
+        fclose(openFile);
+    }
+    else
+    {
+        exit(EXIT_FAILURE);
+    }
     return file;
 }
 
 int runCommands(int nThreads, char *file, char **parameters, int nParameters)
 {
     ThreadPool *threadPool = threadPoolCreate(nThreads);
-    assert(threadPool);
     if (nParameters)
     {
         for (int i = 0; i < nParameters; i++)
@@ -59,7 +63,7 @@ int runCommands(int nThreads, char *file, char **parameters, int nParameters)
             Node *node = malloc(sizeof(Node));
             node->file = file;
             node->parameter = parameters[i];
-            assert(!threadPoolPut(threadPool, work, node));
+            threadPoolPut(threadPool, work, node);
         }
     }
     else
@@ -67,9 +71,9 @@ int runCommands(int nThreads, char *file, char **parameters, int nParameters)
         Node *node = malloc(sizeof(Node));
         node->file = file;
         node->parameter = NULL;
-        assert(!threadPoolPut(threadPool, work, node));
+        threadPoolPut(threadPool, work, node);
     }
-    assert(!threadPoolFree(threadPool));
+    threadPoolFree(threadPool);
     return 0;
 }
 
@@ -96,7 +100,6 @@ int main(int argc, char *argv[])
         int nThreads = 1;
         int nParameters = 0;
         char **parameters = malloc(sizeof(char *) * argc);
-        assert(parameters);
         char *input = NULL;
         int flag = 0;
 
