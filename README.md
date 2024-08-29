@@ -41,3 +41,5 @@ parallel -t 3 -i "sleep \$1" -p 10 10 10 10 10 10
 ## Change logs
 
 * 0.1 (20240805): Initial version.
+
+* 0.2 (20240821): xxx.
